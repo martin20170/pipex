@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mphilip < mphilip@student.42lyon.fr>       +#+  +:+       +#+        */
+/*   By: mphilip <mphilip@student.42lyon.fr >       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/07 23:00:43 by mphilip           #+#    #+#             */
-/*   Updated: 2023/06/08 16:06:44 by mphilip          ###   ########.fr       */
+/*   Created: 2022/11/21 11:53:11 by mphilip           #+#    #+#             */
+/*   Updated: 2023/03/04 00:15:38 by mphilip          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "essentials.h"
 
-# include "libft/libft.h"
-# include <errno.h>
-# include <time.h>
-# include <sys/wait.h>
+t_list	*ft_lstnew(void *content)
+{
+	t_list	*element;
 
-#endif
+	element = (t_list *)malloc(sizeof(t_list));
+	if (!element)
+		return (NULL);
+	element->content = content;
+	element->next = NULL;
+	return (element);
+}

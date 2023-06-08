@@ -1,21 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mphilip < mphilip@student.42lyon.fr>       +#+  +:+       +#+        */
+/*   By: mphilip <mphilip@student.42lyon.fr >       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/07 23:00:43 by mphilip           #+#    #+#             */
-/*   Updated: 2023/06/08 16:06:44 by mphilip          ###   ########.fr       */
+/*   Created: 2022/11/09 16:27:19 by mphilip           #+#    #+#             */
+/*   Updated: 2023/03/04 00:15:38 by mphilip          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "essentials.h"
 
-# include "libft/libft.h"
-# include <errno.h>
-# include <time.h>
-# include <sys/wait.h>
+void	*ft_memchr(const void *s, int c, size_t n)
+{
+	char	*ptr;
+	size_t	i;
 
-#endif
+	ptr = (char *)s;
+	i = 0;
+	while (i < n)
+	{
+		if ((int)*ptr == (char)c)
+			return ((void *)ptr);
+		i++;
+		ptr++;
+	}
+	return ((void *)0);
+}

@@ -1,21 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_fill_c_by_c.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mphilip < mphilip@student.42lyon.fr>       +#+  +:+       +#+        */
+/*   By: mphilip <mphilip@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/07 23:00:43 by mphilip           #+#    #+#             */
-/*   Updated: 2023/06/08 16:06:44 by mphilip          ###   ########.fr       */
+/*   Created: 2023/03/25 22:07:15 by mphilip           #+#    #+#             */
+/*   Updated: 2023/04/10 21:04:43 by mphilip          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "essentials.h"
 
-# include "libft/libft.h"
-# include <errno.h>
-# include <time.h>
-# include <sys/wait.h>
+void	ft_fill_c_by_c(char *str, int nb_of_c, ...)
+{
+	int		i;
+	va_list	args;
 
-#endif
+	i = 0;
+	va_start(args, nb_of_c);
+	while (i < nb_of_c)
+	{
+		str[i] = va_arg(args, int);
+		i++;
+	}
+	va_end(args);
+}
