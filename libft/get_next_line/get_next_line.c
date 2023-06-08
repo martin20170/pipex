@@ -6,7 +6,7 @@
 /*   By: mphilip < mphilip@student.42lyon.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 11:40:13 by mphilip           #+#    #+#             */
-/*   Updated: 2023/06/08 19:24:57 by mphilip          ###   ########.fr       */
+/*   Updated: 2023/06/08 19:29:35 by mphilip          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ char	*buf_check(int bytes_count, int fd, char *buf, char *line)
 			ft_bzero(buf, BUFFER_SIZE + 1);
 		}
 	}
+	// if (line[0] == '\0')
+	// 	return (free(line), NULL);
 	return (line);
 }
 

@@ -6,7 +6,7 @@
 /*   By: mphilip < mphilip@student.42lyon.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 22:59:46 by mphilip           #+#    #+#             */
-/*   Updated: 2023/06/08 19:20:25 by mphilip          ###   ########.fr       */
+/*   Updated: 2023/06/08 20:29:08 by mphilip          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,41 @@ void	free_cmds(char ***cmds)
 	free(cmds);
 }
 
+char	*complete_output(char *incomplete, char *to_add)
+{
+	char	*result;
+
+	result = ft_strjoin(incomplete, to_add);
+	if (!result)
+		return (NULL);
+	free(incomplete);
+	free(to_add);
+	return (result);
+}
+
+char	*get_cmd_result(int fd)
+{
+	char	*temp;
+	char	*temp_result;
+
+	temp_result = malloc(1);
+	if (!temp_result)
+		return (NULL);
+	temp_result[0] = 0;
+	temp = get_next_line(fd);
+	if (!temp)
+		return (free(temp_result), NULL);
+	while (temp[0])
+	{
+		temp_result = complete_output(temp_result, temp);
+		if (!temp_result)
+			return (free(temp), free(temp_result), NULL);
+		temp = get_next_line(fd);
+		if (!temp)
+			return (free(temp), free(temp_result), NULL);
+	}
+	return (free(temp), temp_result);
+}
 
 int	main(int argc, char **argv)
 {
@@ -105,10 +140,12 @@ int	main(int argc, char **argv)
 			close(infile);
 			if (dup2(fd[1], STDOUT_FILENO) == -1)
 				exit(0);
-			write(STDOUT_FILENO, "infile\ntest\nde\nla\ncomm\n", 23);
+			// write(STDOUT_FILENO, "infile\ntest\nde\nla\ncomm\n", 23);
 			// char	*cmd1_name = cmds[0][0];
-			// if (execve(ft_strjoin("/bin/", cmd1_name), cmds[0], NULL) == -1)
-			// 	perror("\n\nPAS CE PATH LA\n\n");
+
+			char	*args1[]={"cat", "-n", NULL};
+			if (execve("/bin/cat", args1, NULL) == -1)
+				perror("\n\nPAS CE PATH LA\n\n");
 			// else if (execve(ft_strjoin("/bin/", cmd1_name), cmds[0], NULL) == -1)
 			// 	perror("\n\ncommand not exist :)\n\n");
 			close(fd[1]);
@@ -125,11 +162,9 @@ int	main(int argc, char **argv)
 			close(outfile);
 			if (dup2(fd[0], STDIN_FILENO) == -1)
 				exit(0);
-			// char	*buf[6];
-			// read(STDIN_FILENO, buf, 6);
 
-			char	*args[]={"cat", "-n", NULL};
-			if (execve("/bin/cat", args, NULL) == -1)
+			char	*args2[]={"wc", "-l", NULL};
+			if (execve("/usr/bin/wc",  args2, NULL) == -1)
 				perror("\n\nPAS CE PATH LA\n\n");
 			// else if (execve(ft_strjoin("/bin/", cmd2_name), cmds[1], NULL) == -1)
 			// 	perror("\n\ncommand not exist :)\n\n");
