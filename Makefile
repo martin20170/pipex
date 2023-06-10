@@ -1,4 +1,4 @@
-SRCS = main.c
+SRCS = pipex.c cmds_process.c cmds_process_utils.c cmds_path.c strings_init.c free_ft.c
 
 NAME = pipex
 
