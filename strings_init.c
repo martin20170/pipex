@@ -6,7 +6,7 @@
 /*   By: mphilip < mphilip@student.42lyon.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 15:16:07 by mphilip           #+#    #+#             */
-/*   Updated: 2023/06/10 15:17:28 by mphilip          ###   ########.fr       */
+/*   Updated: 2023/06/10 15:44:32 by mphilip          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,16 +66,16 @@ char	***get_cmds(char **input)
 	return (result);
 }
 
-int	strings_init(char ***in_n_out_ad, char ***path_ad, char ****cmds_ad, t_args args)
+int	str_init(char ***inout_a, char ***path_a, char ****cmds_a, t_args args)
 {
-	*in_n_out_ad = get_in_and_out(args.argv);
-	if (!(*in_n_out_ad))
+	*inout_a = get_in_and_out(args.argv);
+	if (!(*inout_a))
 		return (0);
-	*path_ad = get_path(args.envp);
-	if (!path_ad)
-		return (free_strlst(*in_n_out_ad), 0);
-	*cmds_ad = get_cmds(args.argv);
-	if (!(*cmds_ad))
-		return (free_strlst(*in_n_out_ad), free_strlst(*path_ad), 0);
+	*path_a = get_path(args.envp);
+	if (!path_a)
+		return (free_strlst(*inout_a), 0);
+	*cmds_a = get_cmds(args.argv);
+	if (!(*cmds_a))
+		return (free_strlst(*inout_a), free_strlst(*path_a), 0);
 	return (1);
 }
