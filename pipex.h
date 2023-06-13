@@ -6,7 +6,7 @@
 /*   By: mphilip < mphilip@student.42lyon.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 23:00:43 by mphilip           #+#    #+#             */
-/*   Updated: 2023/06/10 15:44:25 by mphilip          ###   ########.fr       */
+/*   Updated: 2023/06/13 12:16:19 by mphilip          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct s_cmds_p
 	pid_t	cmd2_p;
 	int		cmd1_status;
 	int		cmd2_status;
+	int		cmds_status;
 	int		fd[2];
 }			t_cmds_p;
 
@@ -31,6 +32,8 @@ typedef struct s_args
 {
 	char	**argv;
 	char	**envp;
+	int		wpid_cmds;
+	int		main_status;
 }			t_args;
 
 
@@ -46,7 +49,7 @@ int		str_init(char ***inout_a, char ***path_a, char ****cmds_a, t_args args);
 /* ########################### FREE_FT ########################### */
 
 
-void	*error_state(void);
+int		error_state(void);
 void	free_cmds(char ***cmds);
 void	free_strlst(char **var);
 void	free_process(char **path, char **inout, char ***cmds, int endmain);

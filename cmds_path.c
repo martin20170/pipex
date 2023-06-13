@@ -6,7 +6,7 @@
 /*   By: mphilip < mphilip@student.42lyon.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 15:27:47 by mphilip           #+#    #+#             */
-/*   Updated: 2023/06/10 15:28:12 by mphilip          ###   ########.fr       */
+/*   Updated: 2023/06/13 12:47:41 by mphilip          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,11 @@ char	**get_cmd_path(char **path, char *cmd_name)
 	{
 		temp = name_with_slash(cmd_name);
 		if (!temp)
-			return (free_strlst(result), NULL);
+			return (free(result), NULL);
 		result[i] = ft_strjoin(path[i], temp);
 		if (!result)
 			return (free(temp), free_strlst(result), NULL);
+		free(temp);
 		i++;
 	}
 	result[i] = NULL;

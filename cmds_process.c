@@ -6,7 +6,7 @@
 /*   By: mphilip < mphilip@student.42lyon.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 15:23:37 by mphilip           #+#    #+#             */
-/*   Updated: 2023/06/10 15:43:10 by mphilip          ###   ########.fr       */
+/*   Updated: 2023/06/13 12:43:18 by mphilip          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,10 @@ int	exec_loop(char **cmd_path, char **cmd)
 void	cmd1_process(t_cmds_p params, char **path, char **inout, char ***cmds)
 {
 	char	**cmd1_path;
+	int		wpid;
 
 	cmd1_path = get_cmd_path(path, cmds[0][0]);
-	if (!cmd1_path)
+	if (!cmd1_path && error_state() == 1)
 		free_process(path, inout, cmds, 0);
 	close(params.fd[0]);
 	params.cmd1_p = fork();
@@ -44,16 +45,19 @@ void	cmd1_process(t_cmds_p params, char **path, char **inout, char ***cmds)
 	{
 		cmd1_check(cmd1_path, params, cmds);
 		close(params.fd[1]);
-		while (wait(NULL) != -1 || errno != ECHILD);
+		wpid = wait(&(params.cmd1_status));
+		while (wpid > 0)
+			wpid = wait(&(params.cmd1_status));
 	}
 }
 
 void	cmd2_process(t_cmds_p params, char **path, char **inout, char ***cmds)
 {
 	char	**cmd2_path;
+	int		wpid;
 
 	cmd2_path = get_cmd_path(path, cmds[1][0]);
-	if (!cmd2_path)
+	if (!cmd2_path && error_state() == 1)
 		free_process(path, inout, cmds, 0);
 	close(params.fd[1]);
 	params.cmd2_p = fork();
@@ -67,7 +71,9 @@ void	cmd2_process(t_cmds_p params, char **path, char **inout, char ***cmds)
 	{
 		cmd2_check(cmd2_path, params, cmds);
 		close(params.fd[1]);
-		while (wait(NULL) != -1 || errno != ECHILD);
+		wpid = wait(&(params.cmd1_status));
+		while (wpid > 0)
+			wpid = wait(&(params.cmd1_status));
 	}
 }
 

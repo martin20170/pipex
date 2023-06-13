@@ -6,7 +6,7 @@
 /*   By: mphilip < mphilip@student.42lyon.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 15:16:07 by mphilip           #+#    #+#             */
-/*   Updated: 2023/06/10 15:44:32 by mphilip          ###   ########.fr       */
+/*   Updated: 2023/06/13 12:40:06 by mphilip          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	**get_in_and_out(char **input)
 
 	result = malloc(sizeof(char *) * 3);
 	if (!result)
-		error_state();
+		return (NULL);
 	result[0] = input[1];
 	result[1] = input[4];
 	result[2] = NULL;
@@ -40,7 +40,6 @@ char	**get_path(char **envp)
 			result = ft_split(var[1], ':');
 			if (!result)
 				return (free_strlst(var), NULL);
-
 			return (free_strlst(var), result);
 		}
 		free_strlst(var);
@@ -55,13 +54,14 @@ char	***get_cmds(char **input)
 
 	result = malloc(sizeof(char **) * 3);
 	if (!result)
-		error_state();
+		return (free(result), NULL);
 	result[0] = ft_split(input[2], ' ');
 	if (!result[0])
-		error_state();
+		return (free(result), free_strlst(result[0]), NULL);
 	result[1] = ft_split(input[3], ' ');
 	if (!result[1])
-		error_state();
+		return (free(result), free_strlst(result[0]), \
+			free_strlst(result[1]), NULL);
 	result[2] = NULL;
 	return (result);
 }
@@ -69,13 +69,13 @@ char	***get_cmds(char **input)
 int	str_init(char ***inout_a, char ***path_a, char ****cmds_a, t_args args)
 {
 	*inout_a = get_in_and_out(args.argv);
-	if (!(*inout_a))
+	if (!(*inout_a) && error_state() == 1)
 		return (0);
 	*path_a = get_path(args.envp);
-	if (!path_a)
+	if (!(*path_a) && error_state() == 1)
 		return (free_strlst(*inout_a), 0);
 	*cmds_a = get_cmds(args.argv);
-	if (!(*cmds_a))
+	if (!(*cmds_a) && error_state() == 1)
 		return (free_strlst(*inout_a), free_strlst(*path_a), 0);
 	return (1);
 }
