@@ -6,7 +6,7 @@
 /*   By: mphilip < mphilip@student.42lyon.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 11:34:28 by mphilip           #+#    #+#             */
-/*   Updated: 2023/06/08 20:18:50 by mphilip          ###   ########.fr       */
+/*   Updated: 2023/06/13 13:04:15 by mphilip          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 
 int		len(char *str);
 
-void		buf_clean(char *buf);
+void	buf_clean(char *buf);
 
 char	*null_str(int size);
 char	*get_next_line(int fd);

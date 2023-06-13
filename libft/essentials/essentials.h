@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   essentials.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mphilip <mphilip@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: mphilip < mphilip@student.42lyon.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 14:55:10 by mphilip           #+#    #+#             */
-/*   Updated: 2023/03/27 18:32:27 by mphilip          ###   ########.fr       */
+/*   Updated: 2023/06/13 13:05:10 by mphilip          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ char	**ft_split(char const *s, char c);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strtrim(char const *s1, char const *set);
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
-void	ft_fill_c_by_c(char *str, int nb_of_c, ...);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 
