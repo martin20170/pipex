@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmds_process.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mphilip < mphilip@student.42lyon.fr>       +#+  +:+       +#+        */
+/*   By: mphilip <mphilip@student.42lyon.fr >       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 15:23:37 by mphilip           #+#    #+#             */
-/*   Updated: 2023/06/13 12:43:18 by mphilip          ###   ########.fr       */
+/*   Updated: 2023/07/12 13:20:24 by mphilip          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	exec_loop(char **cmd_path, char **cmd)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	while (cmd_path[i])
@@ -35,7 +35,9 @@ void	cmd1_process(t_cmds_p params, char **path, char **inout, char ***cmds)
 		free_process(path, inout, cmds, 0);
 	close(params.fd[0]);
 	params.cmd1_p = fork();
-	if (params.cmd1_p == 0)
+	if (params.cmd1_p == -1)
+		free_process(path, inout, cmds, 0);
+	else if (params.cmd1_p == 0)
 	{
 		cmd1_fd_switch(inout, params.fd);
 		if (exec_loop(cmd1_path, cmds[0]) == -1)
@@ -61,7 +63,9 @@ void	cmd2_process(t_cmds_p params, char **path, char **inout, char ***cmds)
 		free_process(path, inout, cmds, 0);
 	close(params.fd[1]);
 	params.cmd2_p = fork();
-	if (params.cmd2_p == 0)
+	if (params.cmd2_p == -1)
+		free_process(path, inout, cmds, 0);
+	else if (params.cmd2_p == 0)
 	{
 		cmd2_fd_switch(inout, params.fd);
 		if (exec_loop(cmd2_path, cmds[1]) == -1)
@@ -86,7 +90,9 @@ void	cmds_process(char **path, char **inout, char ***cmds)
 	cmds_params.cmd2_status = 0;
 	pipe(cmds_params.fd);
 	cmds_p = fork();
-	if (cmds_p == 0)
+	if (cmds_p == -1)
+		free_process(path, inout, cmds, 0);
+	else if (cmds_p == 0)
 		cmd1_process(cmds_params, path, inout, cmds);
 	else
 		cmd2_process(cmds_params, path, inout, cmds);

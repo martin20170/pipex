@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   essentials.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mphilip < mphilip@student.42lyon.fr>       +#+  +:+       +#+        */
+/*   By: mphilip <mphilip@student.42lyon.fr >       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 14:55:10 by mphilip           #+#    #+#             */
-/*   Updated: 2023/06/13 13:05:10 by mphilip          ###   ########.fr       */
+/*   Updated: 2023/07/12 12:30:49 by mphilip          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include <stdarg.h>
 
 /* ------------------------------ LIBC ------------------------------*/
 
@@ -65,7 +64,6 @@ typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
-	int				id;
 }					t_list;
 
 int		ft_lstsize(t_list *lst);

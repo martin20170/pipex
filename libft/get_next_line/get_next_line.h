@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mphilip < mphilip@student.42lyon.fr>       +#+  +:+       +#+        */
+/*   By: mphilip <mphilip@student.42lyon.fr >       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 11:34:28 by mphilip           #+#    #+#             */
-/*   Updated: 2023/06/13 13:04:15 by mphilip          ###   ########.fr       */
+/*   Updated: 2023/03/04 02:09:50 by mphilip          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <fcntl.h>
-# include "../essentials/essentials.h"
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 5
@@ -25,6 +24,9 @@
 int		len(char *str);
 
 void	buf_clean(char *buf);
+void	ft_bzero(void *s, size_t n);
+void	*ft_memcpy(void *dest, const void *src, size_t n);
+void	*ft_memmove(void *dest, const void *src, size_t n);
 
 char	*null_str(int size);
 char	*get_next_line(int fd);

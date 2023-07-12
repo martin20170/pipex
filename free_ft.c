@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_ft.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mphilip < mphilip@student.42lyon.fr>       +#+  +:+       +#+        */
+/*   By: mphilip <mphilip@student.42lyon.fr >       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 15:20:16 by mphilip           #+#    #+#             */
-/*   Updated: 2023/06/13 12:16:53 by mphilip          ###   ########.fr       */
+/*   Updated: 2023/07/12 13:21:09 by mphilip          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,13 @@
 int	error_state(void)
 {
 	ft_printf("An error occured!\n");
-	return (1);
+	exit(EXIT_FAILURE);
+}
+
+void	argc_checker(int argc)
+{
+	if (argc != 5)
+		error_state();
 }
 
 void	free_cmds(char ***cmds)

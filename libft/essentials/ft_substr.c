@@ -6,7 +6,7 @@
 /*   By: mphilip <mphilip@student.42lyon.fr >       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 11:34:25 by mphilip           #+#    #+#             */
-/*   Updated: 2023/03/04 00:15:38 by mphilip          ###   ########.fr       */
+/*   Updated: 2023/07/12 12:31:25 by mphilip          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	if (start < ft_strlen((char *)s))
 	{
 		while (s[start + final_len] && final_len < (unsigned int)len)
-		final_len++;
+			final_len++;
 	}
 	result = malloc(sizeof(char) * (final_len + 1));
 	if (!result)
